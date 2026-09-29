@@ -949,7 +949,7 @@ The project is intentionally designed as a lightweight Photoshop-inspired editor
 
 # 👩‍💻 Author
 
-## Aradhya Dhanger
+## Aradhya Dhangar
 
 **Project:** Image Editor Studio
 **Technology:** HTML5 • CSS3 • Vanilla JavaScript • Canvas API
