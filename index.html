@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffffff">
+    <title>Image Editor — Studio</title>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+    <header class="app-bar">
+        <div class="brand">
+            <div class="brand-mark">✦</div>
+            <div>
+                <h1>Image Editor</h1>
+                <p>Professional browser-based image editing studio</p>
+            </div>
+        </div>
+
+        <nav class="menu-bar">
+            <div class="menu">
+                <button type="button">File</button>
+                <div class="menu-list">
+                    <button type="button" data-action="open">Open Image <span class="shortcut">Ctrl+O</span></button>
+                    <button type="button" data-action="download">Export Image <span class="shortcut">Ctrl+S</span></button>
+                    <button type="button" data-action="reset">Reset Image</button>
+                </div>
+            </div>
+
+            <div class="menu">
+                <button type="button">Edit</button>
+                <div class="menu-list">
+                    <button type="button" data-action="undo">Undo <span class="shortcut">Ctrl+Z</span></button>
+                    <button type="button" data-action="redo">Redo <span class="shortcut">Ctrl+Y</span></button>
+                    <button type="button" data-action="reset">Reset</button>
+                </div>
+            </div>
+
+            <div class="menu">
+                <button type="button">Image</button>
+                <div class="menu-list">
+                    <button type="button" data-action="rotate-left">Rotate Left</button>
+                    <button type="button" data-action="rotate-right">Rotate Right</button>
+                    <button type="button" data-action="flip-h">Flip Horizontal</button>
+                    <button type="button" data-action="flip-v">Flip Vertical</button>
+                </div>
+            </div>
+
+            <div class="menu">
+                <button type="button">Filter</button>
+                <div class="menu-list">
+                    <button type="button" data-action="grayscale">Grayscale</button>
+                    <button type="button" data-action="invert">Invert</button>
+                    <button type="button" data-action="sepia">Sepia</button>
+                    <button type="button" data-action="blur">Blur</button>
+                    <button type="button" data-action="sharpen">Sharpen</button>
+                </div>
+            </div>
+        </nav>
+
+        <div class="bar-actions">
+            <label class="upload"> Upload Image <input id="upload" type="file" accept="image/*"> </label>
+        </div>
+    </header>
+
+    <main>
+        <aside class="panel">
+            <section class="group">
+                <h2>Tools</h2>
+                <div class="tool-grid" id="toolGrid">
+                    <button class="tool active" type="button" data-tool="brush">
+                        <span class="ti">✏️</span>
+                        <span>Brush</span>
+                    </button>
+
+                    <button class="tool" type="button" data-tool="eraser">
+                        <span class="ti">🧽</span>
+                        <span>Eraser</span>
+                    </button>
+
+                    <button class="tool" type="button" data-tool="line">
+                        <span class="ti">╱</span>
+                        <span>Line</span>
+                    </button>
+
+                    <button class="tool" type="button" data-tool="rectangle">
+                        <span class="ti">▭</span>
+                        <span>Rectangle</span>
+                    </button>
+
+                    <button class="tool" type="button" data-tool="ellipse">
+                        <span class="ti">◯</span>
+                        <span>Ellipse</span>
+                    </button>
+
+                    <button class="tool" type="button" data-tool="crop">
+                        <span class="ti">✂</span>
+                        <span>Crop</span>
+                    </button>
+                </div>
+
+                <div class="slider-row">
+                    <label>Brush Size</label>
+                    <output id="sizeValue">10 px</output>
+                </div>
+                <input id="brushSize" type="range" min="1" max="120" value="10">
+
+                <div class="slider-row">
+                    <label>Opacity</label>
+                    <output id="opacityValue">100%</output>
+                </div>
+                <input id="brushOpacity" type="range" min="1" max="100" value="100">
+
+                <div class="color-row">
+                    <span>Color</span>
+                    <input id="brushColor" type="color" value="#2563eb">
+                </div>
+
+                <label class="check">
+                    <input id="fillShapes" type="checkbox">
+                    <span>Fill shapes</span>
+                </label>
+
+                <div class="btn-row three">
+                    <button id="undo" class="btn" type="button">↶ Undo</button>
+                    <button id="redo" class="btn" type="button">↷ Redo</button>
+                    <button id="reset" class="btn danger" type="button">⟲ Reset</button>
+                </div>
+            </section>
+
+            <section class="group">
+                <h2>Adjustments</h2>
+                <div class="slider-row">
+                    <label>Brightness</label>
+                    <output id="brightnessValue">0</output>
+                </div>
+                <input id="brightness" type="range" min="-100" max="100" value="0">
+
+                <div class="slider-row">
+                    <label>Contrast</label>
+                    <output id="contrastValue">0</output>
+                </div>
+                <input id="contrast" type="range" min="-100" max="100" value="0">
+
+                <div class="slider-row">
+                    <label>Saturation</label>
+                    <output id="saturationValue">0</output>
+                </div>
+                <input id="saturation" type="range" min="-100" max="100" value="0">
+
+                <div class="slider-row">
+                    <label>Red</label>
+                    <output id="redValue">0</output>
+                </div>
+                <input id="red" type="range" min="-100" max="100" value="0">
+
+                <div class="slider-row">
+                    <label>Green</label>
+                    <output id="greenValue">0</output>
+                </div>
+                <input id="green" type="range" min="-100" max="100" value="0">
+
+                <div class="slider-row">
+                    <label>Blue</label>
+                    <output id="blueValue">0</output>
+                </div>
+                <input id="blue" type="range" min="-100" max="100" value="0">
+
+                <div class="btn-row">
+                    <button id="applyAdjustments" class="btn primary" type="button">Apply Adjustments</button>
+                    <button id="resetAdjustments" class="btn" type="button">Clear</button>
+                </div>
+            </section>
+
+            <section class="group">
+                <h2>Filters</h2>
+                <div class="btn-row wrap">
+                    <button class="btn" data-filter="grayscale" type="button">Grayscale</button>
+                    <button class="btn" data-filter="invert" type="button">Invert</button>
+                    <button class="btn" data-filter="sepia" type="button">Sepia</button>
+                    <button class="btn" data-filter="blur" type="button">Blur</button>
+                    <button class="btn" data-filter="sharpen" type="button">Sharpen</button>
+                    <button class="btn" data-filter="contrast-boost" type="button">Punch</button>
+                </div>
+            </section>
+
+            <section class="group">
+                <h2>Transform</h2>
+                <div class="btn-row wrap">
+                    <button id="rotateLeft" class="btn" type="button">⟲ Rotate Left</button>
+                    <button id="rotateRight" class="btn" type="button">⟳ Rotate Right</button>
+                    <button id="flipH" class="btn" type="button">⇋ Flip Horizontal</button>
+                    <button id="flipV" class="btn" type="button">⇅ Flip Vertical</button>
+                </div>
+            </section>
+
+            <section class="group">
+                <h2>Export</h2>
+                <select id="format">
+                    <option value="png">PNG — Lossless</option>
+                    <option value="jpeg">JPEG — Compact</option>
+                    <option value="webp">WEBP — Modern</option>
+                </select>
+                <button id="download" class="btn primary block" type="button">⬇ Download Image</button>
+            </section>
+        </aside>
+
+        <section class="workspace">
+            <div class="workspace-bar">
+                <button class="workspace-tool" id="workspaceUndo" type="button">↶</button>
+                <button class="workspace-tool" id="workspaceRedo" type="button">↷</button>
+                <span class="workspace-divider"></span>
+                <button class="workspace-tool" id="workspaceFit" type="button">Fit</button>
+                <button class="workspace-tool" id="workspaceActual" type="button">100%</button>
+                <span class="workspace-info">Canvas Studio</span>
+            </div>
+
+            <div class="stage-wrap">
+                <div class="stage" id="stage">
+                    <div class="stack" id="stack">
+                        <canvas id="canvas"></canvas>
+                        <canvas id="overlay"></canvas>
+                    </div>
+                </div>
+
+                <div class="empty" id="empty">
+                    <div class="empty-card">
+                        <div class="empty-icon">🖼</div>
+                        <h2>Start creating</h2>
+                        <p> Upload an image, drag and drop a file, or paste an image from your clipboard. Everything is processed locally in your browser. </p>
+                    </div>
+                </div>
+
+                <div class="zoom-bar">
+                    <button id="zoomOut" type="button">−</button>
+                    <span class="zoom-value" id="zoomLabel">100%</span>
+                    <button id="zoomIn" type="button">+</button>
+                    <button id="zoomFit" type="button">⤢</button>
+                </div>
+            </div>
+
+            <div class="statusbar">
+                <div class="status-group">
+                    <span class="status-dot"></span>
+                    <span id="toolStatus">Tool: Brush</span>
+                </div>
+                <span class="spacer"></span>
+                <span id="posStatus">—</span>
+                <span id="sizeStatus">No image loaded</span>
+            </div>
+        </section>
+    </main>
+    <div class="toast" id="toast"></div>
+    <script src="script.js"></script>
+</body>
+</html>
